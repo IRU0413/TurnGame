@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: Pink Potion
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: -565526648, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1340774050, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1952714841, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -842828891, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -1673734833, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -2140064719, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1374516810, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1996395988, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -1426632475, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1852511675, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 898921951, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -1116729314, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -1101740748, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -1932412699, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 929569418, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -874922707, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a953a17bd40b05440b0b237d7b89ad68, type: 3}
+  m_Name: Skill_20002
+  m_EditorClassIdentifier: 
+  _id: 20002
+  _name: Passive_Attack_2
+  _abilityType: 2
+  _mana: 3
+  _coolTime: 3
+  _searchFormat: 3
+  _drawPoint: 0
+  _searchDistance: 3
+  _Icon: {fileID: 0}
+  _activeSound: {fileID: 0}

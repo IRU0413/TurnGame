@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccb45f193a7935c459574ea7f55f197b, type: 3}
+  m_Name: EventRoomData
+  m_EditorClassIdentifier: 
+  _constantCount: 1
+  _maxCount: 2
+  _createPercent: 2
+  _merchantEvCreateConstantCount: 0
+  _merchantEvCreatePercent: 34
+  _merchantEvUpgradePercent: 10
+  _skillEvCreateConstantCount: 0
+  _skillEvCreatePercent: 33
+  _skillEvUpgradePercent: 10
+  _weaponEvCreateConstantCount: 0
+  _weaponEvCreatePercent: 33
+  _weaponEvUpgradePercent: 10

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: Small Red Potion
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: -301383767, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -2043590803, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1105196194, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1048905832, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1413199128, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 559533887, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1778735671, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -152453832, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1615234863, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 2112493308, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1365317781, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -1826082708, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1260239175, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -1300846468, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -265107406, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -1171745444, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: Chest Animation 3
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: -2069549054, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -946813599, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -892423048, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -1864995614, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1572702184, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1081635612, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: -1609536192, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  - {fileID: 1240755738, guid: e40319226da2e03459faf00ac611414b, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0
