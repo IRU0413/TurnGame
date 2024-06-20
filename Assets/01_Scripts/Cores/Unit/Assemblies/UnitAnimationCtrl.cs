@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 namespace Scripts.Cores.Unit.Assemblies
 {
     [DisallowMultipleComponent]
-    public class UnitAnimationCtrlCmp : UnitAssembly
+    public class UnitAnimationCtrl : UnitAssembly
     {
         const string FIND_GAEM_OBJECT_NAME = "UnitPrefab";
 
@@ -32,7 +32,7 @@ namespace Scripts.Cores.Unit.Assemblies
             GameObject findNameObj = UnitCore.Tr.Find(FIND_GAEM_OBJECT_NAME)?.gameObject;
             if (findNameObj == null)
             {
-                GameObject loadUnitPrefab = GameManager.Resource.Load<GameObject>("Prefab/Unit/VisualUnit");
+                GameObject loadUnitPrefab = GameManager.Resource.Load<GameObject>("Prefab/Unit/Unit_Visual");
                 GameObject spawnUnitPrefab = GameObject.Instantiate(loadUnitPrefab);
                 spawnUnitPrefab.transform.parent = UnitCore.Tr;
                 findNameObj = spawnUnitPrefab;

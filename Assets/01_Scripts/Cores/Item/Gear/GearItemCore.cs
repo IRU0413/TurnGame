@@ -7,11 +7,8 @@ namespace Scripts.Cores.Item.Gear
 {
     public class GearItemCore : ItemCore
     {
+        [SerializeField] private GearType _gearType = GearType.None;
         [SerializeField] public SerializableDictionary<UnitAbilityType, GearAbility> _status = new SerializableDictionary<UnitAbilityType, GearAbility>();
 
-        // ÀåÂø
-        // ->  
-        // ÇØÁ¦
-        // -> 
     }
 }

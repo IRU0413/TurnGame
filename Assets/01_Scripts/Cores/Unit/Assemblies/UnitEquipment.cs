@@ -1,3 +1,5 @@
+using Scripts.Enums;
+using Scripts.Pattern;
 using UnityEngine;
 
 namespace Scripts.Cores.Unit.Assemblies
@@ -5,12 +7,12 @@ namespace Scripts.Cores.Unit.Assemblies
     [DisallowMultipleComponent]
     public class UnitEquipment : UnitAssembly
     {
-        private GearAbility _helmet;
-        private GearAbility _innerTop;
-        private GearAbility _outerTop;
-        private GearAbility _bottom;
-        private GearAbility _back;
-        private GearAbility _hand;
+        private SerializableDictionary<UnitAbilityType, GearAbility> _helmet;
+        private SerializableDictionary<UnitAbilityType, GearAbility> _innerTop;
+        private SerializableDictionary<UnitAbilityType, GearAbility> _outerTop;
+        private SerializableDictionary<UnitAbilityType, GearAbility> _bottom;
+        private SerializableDictionary<UnitAbilityType, GearAbility> _back;
+        private SerializableDictionary<UnitAbilityType, GearAbility> _hand;
 
         public GearAbility Helmet
         {
@@ -46,6 +48,47 @@ namespace Scripts.Cores.Unit.Assemblies
         protected override void OnInitialized()
         {
             base.OnInitialized();
+        }
+
+        public void Equip(GearType gear, SerializableDictionary<UnitAbilityType, GearAbility> status)
+        {
+            if (gear == GearType.None)
+            {
+                Debug.LogError("해당 장비 아이템의 타입은 미지정 상태입니다.");
+                return;
+            }
+            if (status == null)
+            {
+                Debug.LogError("해당 장비 아이템의 능력치가 Null입니다...");
+                return;
+            }
+
+            switch (gear)
+            {
+                case GearType.Helmet:
+                    _helmet = status;
+                    break;
+                case GearType.InnerTop:
+                    _innerTop = status;
+                    break;
+                case GearType.OuterTop:
+                    _outerTop = status;
+                    break;
+                case GearType.Bottom:
+                    _bottom = status;
+                    break;
+                case GearType.Back:
+                    _back = status;
+                    break;
+                case GearType.Hand:
+                    _hand = status;
+                    break;
+            }
+        }
+
+        public void Unequip(GearType gear)
+        {
+
         }
     }
 }

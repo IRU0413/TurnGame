@@ -99,5 +99,39 @@ namespace Scripts.Data
             _gridCtrl.SetActiveAllTilemap(true);
         }
 
+        public void OnExDrawGizmos()
+        {
+            if (!Application.isPlaying)
+                return;
+
+            Gizmos.color = GetRoomGizmoColor();
+            Gizmos.DrawCube(transform.position, new Vector3(50, 50, 0));
+        }
+        private Color GetRoomGizmoColor()
+        {
+            Color color = Color.white;
+            float a = 0.3f;
+            switch (_roomType)
+            {
+                case RoomType.SafeRoom:
+                    color = new Color(0f, 1f, 0f, a); // 초록색
+                    break;
+                case RoomType.NormalRoom:
+                    color = new Color(0.0f, 1f, 1f, a); // 하늘색
+                    break;
+                case RoomType.EliteRoom:
+                    color = new Color(1f, 0f, 1f, a); // 보라색
+                    break;
+                default:
+                case RoomType.EventRoom:
+                    color = new Color(1f, 1f, 0f, a); // 노란색
+                    break;
+                case RoomType.BossRoom:
+                    color = new Color(1f, 0f, 0f, a); // 빨간색
+                    break;
+            }
+
+            return color;
+        }
     }
 }

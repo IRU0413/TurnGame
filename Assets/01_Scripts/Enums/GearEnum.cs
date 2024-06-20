@@ -2,6 +2,7 @@ namespace Scripts.Enums
 {
     public enum GearType
     {
+        None, // πÃ¡§
         Helmet, // «Ô∏‰
         InnerTop, // ≥ª««
         OuterTop, // ø‹««

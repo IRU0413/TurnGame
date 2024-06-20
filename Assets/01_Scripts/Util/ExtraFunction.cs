@@ -35,7 +35,6 @@ namespace Scripts.Util
                 result.transform.localPosition = Vector3.zero;
             }
 
-
             return result;
         }
 

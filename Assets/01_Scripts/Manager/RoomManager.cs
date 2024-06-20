@@ -9,6 +9,8 @@ namespace Scripts.Manager
 {
     public class RoomManager : MonoBehaviourSingleton<RoomManager>
     {
+        [SerializeField] bool _drawGizmos = false;
+
         private RoomGenerator _roomGenerator = null;
         private Dictionary<Vector2Int, RoomData> _rooms;
         private GameObject _roomGroup = null;
@@ -50,6 +52,17 @@ namespace Scripts.Manager
         public void Use()
         {
             // Implement the use logic here if needed.
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (IsInitialized && _drawGizmos)
+            {
+                foreach (var room in _rooms.Values)
+                {
+                    room.OnExDrawGizmos();
+                }
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 
 namespace Scripts.Cores.Unit
 {
-    [RequireComponent(typeof(UnitAnimationCtrlCmp))]
+    [RequireComponent(typeof(UnitAnimationCtrl))]
     [RequireComponent(typeof(UnitEquipment))]
     public class UnitCore : Core
     {
@@ -19,7 +19,7 @@ namespace Scripts.Cores.Unit
         private SortingGroup _sortingLayer = null;
 
         // Controller Cmp
-        private UnitAnimationCtrlCmp _aniCtrl = null;
+        private UnitAnimationCtrl _aniCtrl = null;
         private UnitEquipment gearCtrl = null;
 
         protected override void Initialized()
@@ -29,7 +29,7 @@ namespace Scripts.Cores.Unit
             if (!UnitManager.Instance.ContainsUnit(this))
                 return;
 
-            _aniCtrl = this.GetAssembly<UnitAnimationCtrlCmp>();
+            _aniCtrl = this.GetAssembly<UnitAnimationCtrl>();
             _state = UnitStateType.Idle;
 
             this.LogPrint(">>>>>>>>>> Unit 초기화 완료");
