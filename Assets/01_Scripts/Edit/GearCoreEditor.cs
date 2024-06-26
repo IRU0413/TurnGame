@@ -17,31 +17,31 @@ namespace Scripts.Edit
 
             GearItemCore gearCore = (GearItemCore)target;
 
-            if (gearCore._status == null)
+            if (gearCore._abilities == null)
             {
-                gearCore._status = new SerializableDictionary<UnitAbilityType, GearAbility>();
+                gearCore._abilities = new SerializableDictionary<GearAbilityType, GearAbility>();
             }
 
             if (GUILayout.Button("Add Entry"))
             {
-                int start = (int)UnitAbilityType.Health;
-                int end = (int)UnitAbilityType.ActionSpeed;
+                int start = (int)GearAbilityType.MaxHealth;
+                int end = (int)GearAbilityType.ActionSpeed;
                 for (int i = start; i <= end; i++)
                 {
-                    UnitAbilityType findKey = (UnitAbilityType)i;
+                    GearAbilityType findKey = (GearAbilityType)i;
 
-                    if (gearCore._status.Contains(findKey))
+                    if (gearCore._abilities.Contains(findKey))
                         continue;
 
-                    gearCore._status.Add((UnitAbilityType)i, new GearAbility());
+                    gearCore._abilities.Add((GearAbilityType)i, new GearAbility());
                     break;
                 }
             }
 
             // Key-Value Pair¸¦ Ç¥½Ã
-            foreach (var kvp in gearCore._status.ToDictionary())
+            foreach (var kvp in gearCore._abilities.ToDictionary())
             {
-                EditorGUILayout.LabelField($"[{kvp.Key.ToString()}]: Point {kvp.Value._point}, Percent {kvp.Value._percent * 100}%");
+                EditorGUILayout.LabelField($"[{kvp.Key.ToString()}]: Point {kvp.Value.Point}, Percent {kvp.Value.Percent * 100}%");
             }
         }
     }

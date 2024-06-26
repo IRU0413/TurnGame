@@ -11,7 +11,7 @@ namespace Scripts.Cores
         private Core _core;
         protected bool _isInitialized;
 
-        public Core BaseCore => _core;
+        public Core Base => _core;
         public bool IsInitialized => _isInitialized;
 
         public void Initialized(Core core)

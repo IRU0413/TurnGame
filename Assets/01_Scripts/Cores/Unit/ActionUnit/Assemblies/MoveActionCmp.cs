@@ -64,9 +64,9 @@ namespace Scripts.Cores.Unit.ActinoUnit.Assemblies
         private void Test()
         {
             List<Vector2> road = new List<Vector2>();
-            road.Add(new Vector2(UnitCore.Tr.position.x, UnitCore.Tr.position.y));
-            road.Add(new Vector2(UnitCore.Tr.position.x + 1, UnitCore.Tr.position.y));
-            road.Add(new Vector2(UnitCore.Tr.position.x + 2, UnitCore.Tr.position.y));
+            road.Add(new Vector2(Unit.Tr.position.x, Unit.Tr.position.y));
+            road.Add(new Vector2(Unit.Tr.position.x + 1, Unit.Tr.position.y));
+            road.Add(new Vector2(Unit.Tr.position.x + 2, Unit.Tr.position.y));
 
             WayToGo(road);
         }
@@ -101,7 +101,7 @@ namespace Scripts.Cores.Unit.ActinoUnit.Assemblies
 
                 if (isInput)
                 {
-                    _goalRoadPos = (Vector2)UnitCore.Tr.position + dir;
+                    _goalRoadPos = (Vector2)Unit.Tr.position + dir;
                     this.State = AssemblyStateType.Choose;
                 }
             }
@@ -109,7 +109,7 @@ namespace Scripts.Cores.Unit.ActinoUnit.Assemblies
             {
                 if (Input.GetKeyDown(KeyCode.KeypadEnter))
                 {
-                    // _roadPos = StageManager.Instance.GetRoad(UnitCore.Tr.position, _goalRoadPos);
+                    // _roadPos = StageManager.Instance.GetRoad(Unit.Tr.position, _goalRoadPos);
                     WayToGo(_roadPos);
                     this.State = AssemblyStateType.Action;
                 }

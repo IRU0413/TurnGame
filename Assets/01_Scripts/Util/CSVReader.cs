@@ -13,7 +13,6 @@ public class CSVReader
         var list = new List<Dictionary<string, object>>();
         // 필요 데이터 불러오기
         TextAsset data = Resources.Load(filePath) as TextAsset;
-
         // 출 바꾸는 무자 확인하고 라인짤라서 저장
         var lines = Regex.Split(data.text, LINE_SPLIT_RE);
 

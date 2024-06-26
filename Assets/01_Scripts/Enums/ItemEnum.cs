@@ -1,17 +1,19 @@
 namespace Scripts.Enums
 {
-    public enum ItemGradeType
-    {
-        Common,
-        Advanced,
-        Rare,
-        Hero,
-        Legend,
-    }
-
     public enum ItemType
     {
-        Noen,
-        Gear,
+        None,
+        Gear = 10000,
+        Potion = 20000,
+    }
+
+    public enum ItemGradeType
+    {
+        None, // ¾øÀ½
+        Common, // ÈçÇÑ
+        Advanced, // °í±ÞÀÇ
+        Rare, // Èñ±ÍÇÑ
+        Hero, // ¿µ¿õ
+        Legend, // Àü¼³
     }
 }

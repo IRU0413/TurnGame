@@ -5,7 +5,7 @@ namespace Scripts.Cores.Skills.Skill
 {
     public class SkillAssembly : Assembly
     {
-        public SkillCore SkillCore => BaseCore as SkillCore;
+        public SkillCore SkillCore => Base as SkillCore;
 
         // 부품 타입
         protected SkillAssemblyType _skillAssemblyType = SkillAssemblyType.None;

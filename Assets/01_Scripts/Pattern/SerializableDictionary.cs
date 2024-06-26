@@ -8,37 +8,46 @@ namespace Scripts.Pattern
     public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiver
     {
         [SerializeField]
-        private List<SerializableKeyValuePair<TKey, TValue>> keyValuePairs = new List<SerializableKeyValuePair<TKey, TValue>>();
+        private List<SerializableKeyValuePair<TKey, TValue>> _keyValuePairs = new List<SerializableKeyValuePair<TKey, TValue>>();
 
-        private Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
+        private Dictionary<TKey, TValue> _dictionary = new Dictionary<TKey, TValue>();
 
-        public void OnBeforeSerialize()
+        public int Count
         {
-            keyValuePairs.Clear();
-            foreach (var pair in dictionary)
+            get
             {
-                keyValuePairs.Add(new SerializableKeyValuePair<TKey, TValue>(pair.Key, pair.Value));
+                if (_keyValuePairs == null)
+                    _keyValuePairs = new();
+                return _keyValuePairs.Count;
             }
         }
 
+        public void OnBeforeSerialize()
+        {
+            _keyValuePairs.Clear();
+            foreach (var pair in _dictionary)
+            {
+                _keyValuePairs.Add(new SerializableKeyValuePair<TKey, TValue>(pair.Key, pair.Value));
+            }
+        }
         public void OnAfterDeserialize()
         {
-            dictionary.Clear();
-            foreach (var pair in keyValuePairs)
+            _dictionary.Clear();
+            foreach (var pair in _keyValuePairs)
             {
-                dictionary[pair.Key] = pair.Value;
+                _dictionary[pair.Key] = pair.Value;
             }
         }
 
         public void Add(TKey key, TValue value)
         {
-            dictionary[key] = value;
+            _dictionary[key] = value;
         }
 
         public bool Contains(TKey key)
         {
             bool result = false;
-            foreach (var pair in keyValuePairs)
+            foreach (var pair in _keyValuePairs)
             {
                 if (!pair.Key.Equals(key))
                     continue;
@@ -50,7 +59,7 @@ namespace Scripts.Pattern
         public bool Contains(TValue value)
         {
             bool result = false;
-            foreach (var pair in keyValuePairs)
+            foreach (var pair in _keyValuePairs)
             {
                 if (!pair.Value.Equals(value))
                     continue;
@@ -62,12 +71,12 @@ namespace Scripts.Pattern
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            return dictionary.TryGetValue(key, out value);
+            return _dictionary.TryGetValue(key, out value);
         }
 
         public Dictionary<TKey, TValue> ToDictionary()
         {
-            return dictionary;
+            return _dictionary;
         }
     }
 }

@@ -55,7 +55,6 @@ namespace Scripts.Cores.Unit.Assemblies
                 _haveItemCount++;
             }
         }
-
         public void RemoveItem(ItemCore item)
         {
             if (!_itemList.Contains(item))
@@ -64,7 +63,8 @@ namespace Scripts.Cores.Unit.Assemblies
                 return;
             }
 
-            item.OutInventory(UnitPos);
+            _itemList.Remove(item);
+            item.OutInventory();
             _haveItemCount--;
         }
     }

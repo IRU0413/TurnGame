@@ -4,7 +4,7 @@ namespace Scripts.Cores.Skills.ReSkillMain
 {
     public class SkillActionAssembly : Assembly
     {
-        protected SkillActionCore SkillMain => BaseCore as SkillActionCore;
+        protected SkillActionCore SkillMain => Base as SkillActionCore;
         protected SkillState _actionState = SkillState.None;
 
         // Not Need Base Fuction

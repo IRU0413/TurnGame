@@ -54,7 +54,7 @@ namespace Scripts.Data
         public GameObject SkillGo => _skillGo;
         public AudioClip SkillActiveSound => _activeSound;
 
-        // public string GoName => $"Skill_{AbilityType}_{Name}_{ID}";
+        // public string GoName => $"Skill_{AbilityType}_{ItemName}_{ID}";
 
         public SkillInfo(int id, SkillSO so)
         {

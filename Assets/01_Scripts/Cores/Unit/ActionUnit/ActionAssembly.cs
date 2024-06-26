@@ -6,7 +6,7 @@ namespace Scripts.Cores.Unit.ActinoUnit
 {
     public class ActionAssembly : UnitAssembly, IInputAble
     {
-        public ActionUnitCore ActionUnitCore => BaseCore as ActionUnitCore;
+        public ActionUnitCore ActionUnitCore => Base as ActionUnitCore;
 
         private ActionType _actionType;
         [Header("= 행동 부품 상태 =")]
