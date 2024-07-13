@@ -12,7 +12,7 @@ namespace Scripts.Cores.Skills.ReSkillMain
 
         private void Update()
         {
-            if (!_isInitialized)
+            if (!IsInitialized)
                 return;
             Action();
         }

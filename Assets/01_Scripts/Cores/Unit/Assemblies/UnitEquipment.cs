@@ -1,134 +1,176 @@
 using Scripts.Cores.Item.Gear;
 using Scripts.Enums;
+using Scripts.Pattern;
+using Scripts.Util;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Cores.Unit.Assemblies
 {
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(UnitInventory))]
     public class UnitEquipment : UnitAssembly
     {
-        private GearItemCore _helmet;
-        private GearItemCore _outerTop;
-        private GearItemCore _innerTop;
-        private GearItemCore _bottom;
-        private GearItemCore _back;
-        private GearItemCore _weapon;
-        private GearItemCore _shield;
+        [Serializable]
+        private class PocketGear
+        {
+            [SerializeField] private GearItemCore _gearItemCore;
+            public List<SpriteRenderer> GearRenderers;
 
+            public bool IsHaveRenderer => (GearRenderers != null);
+            public GearItemCore GearItem
+            {
+                get => _gearItemCore;
+                set
+                {
+                    if (value == null)
+                    {
+                        _gearItemCore = null;
+                        int rCount = GearRenderers.Count;
+                        for (int i = 0; i < rCount; i++)
+                        {
+                            GearRenderers[i].transform.Rotate(Vector3.zero);
+                            GearRenderers[i].sprite = null;
+                        }
+                    }
+                    else
+                    {
+                        _gearItemCore = value;
+
+                        int sCount = _gearItemCore.ItemSprite.Length;
+                        int rCount = GearRenderers.Count;
+                        int minCount = Math.Min(sCount, rCount);
+
+                        for (int i = 0; i < minCount; i++)
+                        {
+                            GearRenderers[i].transform.Rotate(new Vector3(0, 0, _gearItemCore.GearSpriteRotation));
+                            GearRenderers[i].sprite = _gearItemCore.ItemSprite[i];
+                        }
+                    }
+                }
+            }
+            public SerializableDictionary<UnitAbilityType, Ability> Abilities => _gearItemCore?.Abillities;
+        }
+
+        private SerializableDictionary<GearType, PocketGear> _gears;
+
+        protected override void OnBeforeInitialization()
+        {
+            Unit.GetOrAddAssembly<UnitAnimator>();
+        }
         protected override void OnInitialized()
         {
             base.OnInitialized();
+
+            // Setting
+            SetGearDictionary();
         }
 
-        // 장착
-        public void Equip(GearItemCore gear)
+        private void SetGearDictionary()
         {
-            // 장착하려는 부분에 기존 장비가 있다면 기존 장비를 해제한다.
-            GearItemCore previouslyEquippedGear = GetGear(gear.GearType);
-            if (previouslyEquippedGear != null)
-            {
-                if (previouslyEquippedGear == gear)
-                {
-                    return;
-                }
-                Unequip(gear.GearType);
-            }
+            _gears = new();
 
-            // 장비 장착
-            SetGear(gear.GearType, gear);
-
-            // 인벤토리에 넣어져있을 때
-            if (gear.IsInInventory)
+            int startNum = (int)GearType.Helmet;
+            int endNum = (int)GearType.Shield;
+            for (int i = startNum; i <= endNum; i++)
             {
-                var inven = Unit.GetAssembly<UnitInventory>();
-                if (inven != null)
+                GearType type = (GearType)i;
+                List<SpriteRenderer> list = new();
+                switch (type)
                 {
-                    inven.RemoveItem(gear);
+                    case GearType.Helmet:
+                        AddGearPartRenderer(list, "11_Helmet1");
+                        break;
+                    case GearType.InnerTop:
+                        AddGearPartRenderer(list, "ClothBody");
+                        AddGearPartRenderer(list, "21_LCArm");
+                        AddGearPartRenderer(list, "-19_RCArm");
+                        break;
+                    case GearType.OuterTop:
+                        AddGearPartRenderer(list, "BodyArmor");
+                        AddGearPartRenderer(list, "25_L_Shoulder");
+                        AddGearPartRenderer(list, "-15_R_Shoulder");
+                        break;
+                    case GearType.Bottom:
+                        AddGearPartRenderer(list, "_2L_Cloth");
+                        AddGearPartRenderer(list, "_11R_Cloth");
+                        break;
+                    case GearType.Back:
+                        AddGearPartRenderer(list, "Back");
+                        break;
+                    case GearType.Weapon:
+                        AddGearPartRenderer(list, "R_Weapon");
+                        break;
+                    case GearType.Shield:
+                        AddGearPartRenderer(list, "L_Shield");
+                        break;
                 }
+                var gear = new PocketGear();
+                gear.GearRenderers = list;
+
+                _gears.Add(type, gear);
             }
+            _gears.OnBeforeSerialize();
         }
-        // 해제
-        public void Unequip(GearType type)
+        // 부분 파츠 랜더러 위치 추가
+        private void AddGearPartRenderer(List<SpriteRenderer> gearPartRendererList, string gearPartName)
         {
-            GearItemCore gear = GetGear(type);
+            var gear = Unit.Tr.GetChild(gearPartName);
             if (gear == null) return;
 
-            // 해제
-            SetGear(gear.GearType, null);
+            var renderer = gear.GetComponent<SpriteRenderer>();
+            if (renderer == null) return;
+
+            gearPartRendererList.Add(renderer);
+        }
+        // 장착
+        public void Equip(GearItemCore gearItem)
+        {
+            if (gearItem == null) return;
+
+            // 필요한 포켓 가지고 오기
+            PocketGear pocket = _gears.GetValue(gearItem.GearType);
+
+            // 포켓 사용 여부
+            if (pocket == null)
+                return;
+
+            // 포켓에 지금 가지고 있는 장비가 있는지.
+            if (pocket.GearItem != null)
+                Unequip(pocket);
+
+            // 장비 장착
+            pocket.GearItem = gearItem;
+
             var inven = Unit.GetAssembly<UnitInventory>();
             if (inven != null)
-                inven.AddItem(gear);
+                inven.RemoveItem(gearItem);
+            pocket.GearItem.VisualGO.SetActive(false);
+            return;
         }
-
-        private GearItemCore GetGear(GearType type)
+        // 해제
+        public void Unequip(GearType gearType)
         {
-            GearItemCore unequipGear = null;
-            switch (type)
-            {
-                case GearType.Helmet:
-                    unequipGear = _helmet;
-                    break;
-                case GearType.InnerTop:
-                    unequipGear = _innerTop;
-                    break;
-                case GearType.OuterTop:
-                    unequipGear = _outerTop;
-                    break;
-                case GearType.Bottom:
-                    unequipGear = _bottom;
-                    break;
-                case GearType.Back:
-                    unequipGear = _back;
-                    break;
-                case GearType.Weapon:
-                    unequipGear = _weapon;
-                    break;
-                case GearType.Shield:
-                    unequipGear = _shield;
-                    break;
-                default:
-                    Debug.LogError("장비 가지고 오기 실패 잘 못된 장비 타입입니다.");
-                    break;
-            }
-
-            return unequipGear;
-        }
-        private void SetGear(GearType type, GearItemCore gear)
-        {
-            if (type == GearType.None && gear != null)
-            {
-                Debug.LogError("넣어줄 수 없습니다.");
+            if (gearType == GearType.None)
                 return;
-            }
+            PocketGear pocket = _gears.GetValue(gearType);
+            Unequip(pocket);
+        }
+        private void Unequip(PocketGear pocket)
+        {
+            if (pocket == null)
+                return;
 
-            switch (type)
+            // 인벤에 추가
+            var inven = Unit.GetAssembly<UnitInventory>();
+            if (inven != null)
+                inven.AddItem(pocket.GearItem);
+            else
             {
-                case GearType.Helmet:
-                    _helmet = gear;
-                    break;
-                case GearType.InnerTop:
-                    _innerTop = gear;
-                    break;
-                case GearType.OuterTop:
-                    _outerTop = gear;
-                    break;
-                case GearType.Bottom:
-                    _bottom = gear;
-                    break;
-                case GearType.Back:
-                    _back = gear;
-                    break;
-                case GearType.Weapon:
-                    _weapon = gear;
-                    break;
-                case GearType.Shield:
-                    _shield = gear;
-                    break;
-                default:
-                    Debug.LogError("해당 장비 아이템의 타입은 미지정 상태입니다.");
-                    return;
+                pocket.GearItem.VisualGO.SetActive(true);
             }
+            // 해제
+            pocket.GearItem = null;
         }
     }
 }

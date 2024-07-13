@@ -16,22 +16,17 @@ MonoBehaviour:
   _itemName: "\uACE0\uAE09 \uD070\uBAA8\uC790"
   _itemType: 10000
   _itemGradeType: 2
+  _itemSprite:
+  - {fileID: 21300000, guid: 10172180b1835964e9a8b7457d2964f7, type: 3}
+  _spriteRotationCalibration: 45
   _gearType: 1
   _abilities:
     _keyValuePairs:
-    - Key: 0
+    - Key: 2
       Value:
         Point: 20
         Percent: 0
-    - Key: 4
-      Value:
-        Point: 10
-        Percent: 0
-    - Key: 5
-      Value:
-        Point: 10
-        Percent: 0
-    - Key: 10
+    - Key: 6
       Value:
         Point: 10
         Percent: 0

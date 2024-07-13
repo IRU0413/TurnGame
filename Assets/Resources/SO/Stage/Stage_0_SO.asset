@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709923b5b9e37c84bbcb012df5d911c6, type: 3}
   m_Name: Stage_0_SO
   m_EditorClassIdentifier: 
-  _distanceBetweenSafeBoss: 7
-  _addCreateRoomCount: 10
+  _distanceBetweenSafeBoss: 27
+  _addCreateRoomCount: 57
   _eliteRoomData: {fileID: 11400000, guid: ab644cbc50f0d9c4ea915766073d7eb4, type: 2}
   _eventRoomData: {fileID: 11400000, guid: 548c22dec9cc52d4da54b5b462cec753, type: 2}
   _itemLimitGrade: 1

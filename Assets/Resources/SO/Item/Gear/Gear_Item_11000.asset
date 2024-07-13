@@ -16,22 +16,19 @@ MonoBehaviour:
   _itemName: "\uD754\uD55C \uC678\uD53C"
   _itemType: 10000
   _itemGradeType: 1
+  _itemSprite:
+  - {fileID: 1589403714872849932, guid: 8f78d772a66b1da40b65cd59381bd509, type: 3}
+  - {fileID: 4425119332354987815, guid: 8f78d772a66b1da40b65cd59381bd509, type: 3}
+  - {fileID: 889668667309676848, guid: 8f78d772a66b1da40b65cd59381bd509, type: 3}
+  _spriteRotationCalibration: 0
   _gearType: 3
   _abilities:
     _keyValuePairs:
-    - Key: 0
+    - Key: 2
       Value:
         Point: 5
         Percent: 0
-    - Key: 4
-      Value:
-        Point: 10
-        Percent: 0
-    - Key: 5
-      Value:
-        Point: 10
-        Percent: 0
-    - Key: 10
+    - Key: 6
       Value:
         Point: 10
         Percent: 0

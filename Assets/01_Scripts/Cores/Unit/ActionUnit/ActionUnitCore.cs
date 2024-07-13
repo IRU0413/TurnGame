@@ -58,11 +58,11 @@ namespace Scripts.Cores.Unit.ActinoUnit
             SetState(UnitStateType.Idle);
             _actionTurnCounting = 0;
 
-            List<ActionAssembly> actions = GetAllAssembly<ActionAssembly>();
+            /*List<ActionAssembly> actions = GetAllAssembly<ActionAssembly>();
             foreach (var action in actions)
             {
                 _actionAssemblies.Add(action.ActionAssemblyType, action);
-            }
+            }*/
         }
 
         public void MyTurn()

@@ -24,14 +24,14 @@ namespace Scripts.Cores.Unit.ActinoUnit.Assemblies
             if (_moveModule == null)
                 _moveModule = new MoveModule();
 
-            _moveModule.Init(ActionUnitCore.Tr, ActionUnitCore.Tr.position, _moveSpeed);
+            _moveModule.Init(ActionUnitCore.Tr, ActionUnitCore.Tr.position);
             ActionAssemblyType = ActionType.Move;
             base.OnInitialized();
         }
 
         public bool Move()
         {
-            _moveModule.Move();
+            _moveModule.Move(_moveSpeed);
 
             // 현재 이동 중이라면
             if (_moveModule.IsMoving)
@@ -41,7 +41,7 @@ namespace Scripts.Cores.Unit.ActinoUnit.Assemblies
             if (_roadIndex < _roadMaxIndex)
             {
                 _roadIndex++;
-                _moveModule.RunSetting(_roadPos[_roadIndex]);
+                _moveModule.DirectionRunSetting(_roadPos[_roadIndex]);
                 return true;
             }
 
@@ -58,7 +58,7 @@ namespace Scripts.Cores.Unit.ActinoUnit.Assemblies
             _roadPos = roadPos;
             _roadIndex = 1;
             _roadMaxIndex = roadPos.Count - 1;
-            _moveModule.RunSetting(_roadPos[_roadIndex]);
+            _moveModule.DirectionRunSetting(_roadPos[_roadIndex]);
             return true;
         }
         private void Test()

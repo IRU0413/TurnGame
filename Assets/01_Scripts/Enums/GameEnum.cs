@@ -1,6 +1,6 @@
 namespace Scripts.Enums
 {
-    public enum GameType
+    public enum GameModeType
     {
         None = 0,
         Test,

@@ -8,7 +8,7 @@ namespace Scripts.Edit
     [CustomEditor(typeof(UnitInventory))]
     public class UnitInventoryEditor : Editor
     {
-        private ItemCore _addItem;
+        private ItemCore _targetItem;
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
@@ -17,24 +17,23 @@ namespace Scripts.Edit
             if (!inventory.IsInitialized)
                 return;
 
-            _addItem = EditorGUILayout.ObjectField("Add Item", _addItem, typeof(ItemCore), true) as ItemCore;
+            _targetItem = EditorGUILayout.ObjectField("Target Item", _targetItem, typeof(ItemCore), true) as ItemCore;
 
             if (GUILayout.Button("Add Item"))
             {
-                AddItem();
+                AddItem(inventory);
+            }
+            if (GUILayout.Button("Remove Item"))
+            {
+                RemoveItem(inventory);
             }
         }
 
-        private void AddItem()
+        private void AddItem(UnitInventory inventory)
         {
-            UnitInventory inventory = (UnitInventory)target;
-
-            // 필드에서 아이템을 드래그 앤 드롭할 수 있는 공간 추가
-            EditorGUILayout.HelpBox("Drag and drop an item GameObject here to add it to the inventory.", MessageType.Info);
-
-            if (_addItem != null)
+            if (_targetItem != null)
             {
-                ItemCore addItem = _addItem.GetComponent<ItemCore>();
+                ItemCore addItem = _targetItem.GetComponent<ItemCore>();
 
                 if (addItem != null)
                 {
@@ -42,7 +41,22 @@ namespace Scripts.Edit
                     EditorUtility.SetDirty(target);
                 }
 
-                _addItem = null;
+                _targetItem = null;
+            }
+        }
+        private void RemoveItem(UnitInventory inventory)
+        {
+            if (_targetItem != null)
+            {
+                ItemCore removeItem = _targetItem.GetComponent<ItemCore>();
+
+                if (removeItem != null)
+                {
+                    inventory.RemoveItem(removeItem);
+                    EditorUtility.SetDirty(target);
+                }
+
+                _targetItem = null;
             }
         }
     }

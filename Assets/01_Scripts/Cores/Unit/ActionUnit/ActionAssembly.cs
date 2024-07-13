@@ -73,7 +73,7 @@ namespace Scripts.Cores.Unit.ActinoUnit
         #region State Setting
         private void SetStateSetting(AssemblyStateType state)
         {
-            if (!_isInitialized) return;
+            if (!IsInitialized) return;
             // 다음 단계의 상태로 변환하거나 전 단계로 돌리는 것은가능. 한번에 2단계 변경은 안됨. 
             if ((int)_state + 1 < (int)state) return;
 
@@ -141,7 +141,7 @@ namespace Scripts.Cores.Unit.ActinoUnit
         #region State Update
         private void StateUpdate()
         {
-            if (!_isInitialized) return;
+            if (!IsInitialized) return;
 
             switch (_state)
             {

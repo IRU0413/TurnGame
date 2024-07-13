@@ -9,8 +9,6 @@ namespace Scripts.Cores.Item
 {
     public abstract class ItemCore : Core
     {
-        [SerializeField] private bool _isInInventory = false;
-
         // 아이템 상태
         private bool _isSettingData = false;
         private bool _isSettingVisual = false;
@@ -21,10 +19,14 @@ namespace Scripts.Cores.Item
         [SerializeField] protected string _itemName; // 이름
         [SerializeField] protected ItemType _itemType; // 아이템 타입
         [SerializeField] protected ItemGradeType _itemGradeType; // 아이템 등급
+        [SerializeField] protected Sprite[] _itemSprite; // 아이템 이미지들
+        [SerializeField] protected float _itemSpriteRotation; // 아이템 스프라이트 회전 보정
+
+        private Sprite _iconSprite; // 아이콘 이지미(아이템 스프라이트의 갯수가 1초과일 때 생성됨)
+
         private Vector2Int _fieldPosition; // 필드 위치
 
         // Visual
-        private Sprite _applyIcon;
         private GameObject _visualGo;
         private SortingGroup _sortG;
         private SpriteRenderer _iconRenderer;
@@ -33,7 +35,8 @@ namespace Scripts.Cores.Item
         private AudioClip _InSound; // 인벤에 넣었을 때(각 아이템의 소리가 다를 수 있으니)
         private AudioClip _outSound; // 인벤에서 나왔을 때(각 아이템의 소리가 다를 수 있으니)
 
-        public bool IsInInventory => _isInInventory;
+        public Sprite[] ItemSprite => _itemSprite;
+        public GameObject VisualGO => _visualGo;
 
         #region Setting
         protected override void Initialized()
@@ -42,10 +45,12 @@ namespace Scripts.Cores.Item
             _isSettingVisual = SettingVisual();
             _isSettingFieldPosition = SettingFieldPosition();
 
+            _isSettingFieldPosition = true;
+
             base.Initialized();
 
             bool isUsable = ((_isSettingData && _isSettingVisual
-            && _isSettingFieldPosition) || GameManager.GameType == GameType.Test);
+            && _isSettingFieldPosition) || GameManager.GameMode == GameModeType.Test);
 
             this.gameObject.SetActive(isUsable);
         }
@@ -55,13 +60,14 @@ namespace Scripts.Cores.Item
         }
         protected virtual bool SettingFieldPosition()
         {
-            transform.position = GetChangeWorldPosition(_fieldPosition);
+            // transform.position = GetChangeWorldPosition(_fieldPosition);
             // 나중에 CoreManager or UnitManager or ItemManager 관련해서
             // 만들어서 아이템 관리 될 때 수정
             return false;
         }
         protected virtual bool SettingVisual()
         {
+            // 필요 아이템 비주얼 가지고 오기
             var visual = transform.Find("Item_Visual");
             if (visual == null)
             {
@@ -75,17 +81,20 @@ namespace Scripts.Cores.Item
                 visual = GameObject.Instantiate(visualPrefab).transform;
             }
 
-            this.gameObject.name = _itemName;
-
+            // 레이어 세팅
             _visualGo = visual.gameObject;
             _sortG = visual.GetOrAddComponent<SortingGroup>();
             _sortG.sortingOrder = (int)LayerType.Item;
 
+            // 해당 옵젝의 하위로 넣어주기
             visual.transform.parent = this.transform;
+            visual.transform.localPosition = Vector2.zero;
+
+            // 아이콘 세팅
             var findIconObj = visual.CreateChildGameObject("Icon");
             _iconRenderer = findIconObj.GetOrAddComponent<SpriteRenderer>();
-
-            _iconRenderer.sprite = _applyIcon;
+            _iconSprite = GetIconSprite(_itemSprite);
+            _iconRenderer.sprite = _iconSprite;
 
             return true;
         }
@@ -95,6 +104,8 @@ namespace Scripts.Cores.Item
         // 인게임 생성 시 실행될 녀석
         public void Spawn(int id, Vector2Int fieldPosition)
         {
+            if (_isInitialized)
+                return;
             this.gameObject.SetActive(false);
 
             _id = id;
@@ -102,9 +113,10 @@ namespace Scripts.Cores.Item
 
             Initialized();
         }
-        private void Awake()
+
+        private void OnEnable()
         {
-            Spawn(10000, Vector2Int.right);
+            Spawn(_id, Vector2Int.right);
         }
 
         // 필드 위치 월드 워치로 변경
@@ -118,7 +130,7 @@ namespace Scripts.Cores.Item
         {
             var resultType = ItemType.None;
 
-            int count = 10000 / id;
+            int count = id / 10000;
 
             switch (count)
             {
@@ -142,18 +154,15 @@ namespace Scripts.Cores.Item
             return so;
         }
 
+        private Sprite GetIconSprite(Sprite[] itemSprites)
+        {
+            Texture2D spriteParentTexture2D = itemSprites[0].texture;
+            int pixelsPerUnit = 32;
 
-        // 주워졌을 때 실행
-        public virtual void InInventroy()
-        {
-            _isInInventory = true;
-            _visualGo.SetActive(!_isInInventory);
-        }
-        // 꺼내졌을 때 실행
-        public virtual void OutInventory()
-        {
-            _isInInventory = false;
-            _visualGo.SetActive(!_isInInventory);
+            float preCount = (pixelsPerUnit / 2.0f) / spriteParentTexture2D.height;
+
+            return Sprite.Create(spriteParentTexture2D, new Rect(0, 0, spriteParentTexture2D.width, spriteParentTexture2D.height), new Vector2(0.5f, preCount), 32);
+
         }
     }
 }

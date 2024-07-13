@@ -28,16 +28,16 @@ namespace Scripts.Manager
 
         private void Setting()
         {
-            var gameType = GameManager.GameType;
+            var gameType = GameManager.GameMode;
 
             _gridGenerator = new StageGridGenerator(gameType);
 
             switch (gameType)
             {
-                case GameType.Test:
+                case GameModeType.Test:
                     _stageNum = 0;
                     break;
-                case GameType.Normal:
+                case GameModeType.Normal:
                     _stageNum = 1;
                     break;
             }

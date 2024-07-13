@@ -16,18 +16,12 @@ MonoBehaviour:
   _itemName: "\uACE0\uAE09 \uD070\uBC29\uD328"
   _itemType: 10000
   _itemGradeType: 2
+  _itemSprite: []
+  _spriteRotationCalibration: 0
   _gearType: 7
   _abilities:
     _keyValuePairs:
-    - Key: 4
+    - Key: 6
       Value:
         Point: 20
-        Percent: 0
-    - Key: 5
-      Value:
-        Point: 20
-        Percent: 0
-    - Key: 10
-      Value:
-        Point: 10
         Percent: 0

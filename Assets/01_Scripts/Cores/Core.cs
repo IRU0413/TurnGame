@@ -1,7 +1,5 @@
-﻿using Scripts.Manager;
-using Scripts.Util;
+﻿using Scripts.Util;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Scripts.Cores
@@ -28,10 +26,6 @@ namespace Scripts.Cores
         {
             return _assamblies.Find(x => x is T) as T;
         }
-        public List<T> GetAllAssembly<T>() where T : Assembly
-        {
-            return _assamblies.OfType<T>().ToList();
-        }
 
         /// <summary>
         /// 부품 추가 되면서 초기화 
@@ -43,17 +37,18 @@ namespace Scripts.Cores
             if (!_assamblies.Contains(assembly))
                 _assamblies.Add(assembly);
 
-            // 선 초기화 진행
-            /*if (!assembly.IsInitialized)
-            {
-                UnitManager.Instance.AddLateInitialize(this, assembly);
-                return false;
-            }*/
-
             if (_isInitialized)
                 assembly.Initialized(this);
-            else
-                AssemblyManager.Instance.AddLateInitialize(this, assembly);
+        }
+
+        public virtual T GetOrAddAssembly<T>() where T : Assembly
+        {
+            T assembly = GetAssembly<T>();
+            if (assembly == null)
+            {
+                assembly = this.gameObject.AddComponent<T>();
+            }
+            return assembly;
         }
 
         /// <summary>
@@ -75,10 +70,9 @@ namespace Scripts.Cores
             if (_isInitialized) return;
 
             _tr = GetComponent<Transform>();
-            HaveAssembliesInitalizing();
-
             _isInitialized = true;
-            AssemblyManager.Instance.InitializeCoreAssemblies(this);
+
+            HaveAssembliesInitalizing();
             this.LogPrint($"Core 초기화");
         }
 
@@ -90,7 +84,6 @@ namespace Scripts.Cores
             {
                 // 활성화 되지않았다면 
                 if (!assembly.enabled) continue;
-
                 AddAssembly(assembly);
             }
         }

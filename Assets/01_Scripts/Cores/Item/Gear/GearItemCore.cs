@@ -9,10 +9,11 @@ namespace Scripts.Cores.Item.Gear
     public class GearItemCore : ItemCore
     {
         [SerializeField] private GearType _gearType = GearType.None;
-        [SerializeField] public SerializableDictionary<GearAbilityType, GearAbility> _abilities = new SerializableDictionary<GearAbilityType, GearAbility>();
+        [SerializeField] private SerializableDictionary<UnitAbilityType, Ability> _abilities = new SerializableDictionary<UnitAbilityType, Ability>();
 
         public GearType GearType => _gearType;
-        public SerializableDictionary<GearAbilityType, GearAbility> Abillities => _abilities;
+        public SerializableDictionary<UnitAbilityType, Ability> Abillities => _abilities;
+        public float GearSpriteRotation => _itemSpriteRotation;
 
         protected override bool SettingData()
         {
@@ -23,21 +24,18 @@ namespace Scripts.Cores.Item.Gear
             _itemName = so.ItemName;
             _itemType = so.ItemType;
             _itemGradeType = so.ItemGradeType;
+            _itemSprite = so.ItemSprite;
+            _itemSpriteRotation = so.ItemSpriteRotation;
 
             _gearType = so.GearType;
             _abilities = so.Abilities;
 
+            // 아이템 이름 정의
+            this.gameObject.name = $"Item_{_id}_{_itemName}";
+
             // 정상적으로 넣어졌는지 확인
             if (_gearType == GearType.None || _abilities.Count <= 0)
                 return false;
-            return true;
-        }
-        protected override bool SettingVisual()
-        {
-            bool isBaseVisualSetting = base.SettingVisual();
-            if (!isBaseVisualSetting) return false;
-
-            // 장비 위치에 배정.
             return true;
         }
     }

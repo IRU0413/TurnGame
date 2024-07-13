@@ -1,34 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class SPUM_SpriteList : MonoBehaviour
 {
-    // 파츠 연결 위치
-    public List<SpriteRenderer> _itemList = new List<SpriteRenderer>(); // 파츠 리스트
-    public List<SpriteRenderer> _eyeList = new List<SpriteRenderer>(); // 눈
-    public List<SpriteRenderer> _hairList = new List<SpriteRenderer>(); // 머리
-    public List<SpriteRenderer> _bodyList = new List<SpriteRenderer>(); // 몸
-    public List<SpriteRenderer> _clothList = new List<SpriteRenderer>(); // 옷
-    public List<SpriteRenderer> _armorList = new List<SpriteRenderer>(); // 갑옷
-    public List<SpriteRenderer> _pantList = new List<SpriteRenderer>(); // 바지
-    public List<SpriteRenderer> _weaponList = new List<SpriteRenderer>(); // 무기
-    public List<SpriteRenderer> _backList = new List<SpriteRenderer>(); // 뒤(망토 등등)
+    public List<SpriteRenderer> _itemList = new List<SpriteRenderer>();
+    public List<SpriteRenderer> _eyeList = new List<SpriteRenderer>();
+    public List<SpriteRenderer> _hairList = new List<SpriteRenderer>();
+    public List<SpriteRenderer> _bodyList = new List<SpriteRenderer>();
+    public List<SpriteRenderer> _clothList = new List<SpriteRenderer>();
+    public List<SpriteRenderer> _armorList = new List<SpriteRenderer>();
+    public List<SpriteRenderer> _pantList = new List<SpriteRenderer>();
+    public List<SpriteRenderer> _weaponList = new List<SpriteRenderer>();
+    public List<SpriteRenderer> _backList = new List<SpriteRenderer>();
 
-    public SPUM_HorseSpriteList _spHorseSPList; // 말 스프라이트 리스트
-    public string _spHorseString; // 지정 말 위치
+    public SPUM_HorseSpriteList _spHorseSPList;
+    public string _spHorseString;
     // Start is called before the first frame update
 
-    // 현재는 어디에서 사용되는지 잘 모르겠음
-    public Texture2D _bodyTexture; // 몸 텍스쳐
-    public string _bodyString; // 지정 몸 위치
+    public Texture2D _bodyTexture;
+    public string _bodyString;
 
-    // 필요 리소스
-    public List<string> _hairListString = new List<string>(); // 머리
-    public List<string> _clothListString = new List<string>(); // 옷
-    public List<string> _armorListString = new List<string>(); // 갑옷
-    public List<string> _pantListString = new List<string>(); // 바지
-    public List<string> _weaponListString = new List<string>(); // 무기
-    public List<string> _backListString = new List<string>(); // 뒤(망토 등등)
+    public List<string> _hairListString = new List<string>();
+    public List<string> _clothListString = new List<string>();
+    public List<string> _armorListString = new List<string>();
+    public List<string> _pantListString = new List<string>();
+    public List<string> _weaponListString = new List<string>();
+    public List<string> _backListString = new List<string>();
+
+
 
     public void Reset()
     {

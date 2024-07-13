@@ -1,9 +1,5 @@
 using Scripts.Cores.Item.Gear;
-using Scripts.Cores.Unit;
-using Scripts.Enums;
-using Scripts.Pattern;
 using UnityEditor;
-using UnityEngine;
 
 namespace Scripts.Edit
 {
@@ -17,9 +13,9 @@ namespace Scripts.Edit
 
             GearItemCore gearCore = (GearItemCore)target;
 
-            if (gearCore._abilities == null)
+            /*if (gearCore._abilities == null)
             {
-                gearCore._abilities = new SerializableDictionary<GearAbilityType, GearAbility>();
+                gearCore._abilities = new SerializableDictionary<GearAbilityType, Ability>();
             }
 
             if (GUILayout.Button("Add Entry"))
@@ -33,15 +29,15 @@ namespace Scripts.Edit
                     if (gearCore._abilities.Contains(findKey))
                         continue;
 
-                    gearCore._abilities.Add((GearAbilityType)i, new GearAbility());
+                    gearCore._abilities.Add((GearAbilityType)i, new Ability());
                     break;
                 }
-            }
+            }*/
 
             // Key-Value Pair¸¦ Ç¥½Ã
-            foreach (var kvp in gearCore._abilities.ToDictionary())
+            foreach (var kvp in gearCore.Abillities.ToDictionary())
             {
-                EditorGUILayout.LabelField($"[{kvp.Key.ToString()}]: Point {kvp.Value.Point}, Percent {kvp.Value.Percent * 100}%");
+                EditorGUILayout.LabelField($"[{kvp.Key}]: Point {kvp.Value.Point}, Percent {kvp.Value.Percent * 100}%");
             }
         }
     }

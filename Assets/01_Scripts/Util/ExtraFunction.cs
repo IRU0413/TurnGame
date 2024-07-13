@@ -204,5 +204,32 @@ namespace Scripts.Util
         {
             DebugPrintManager.Instance.Error(mono, logMessage);
         }
+
+        public static Transform GetChild(this Transform parent, string goName)
+        {
+            // 없다면 null
+            if (parent == null)
+                return null;
+
+            // 해당 녀석이 찾는 놈일 경우
+            if (parent.name == goName)
+                return parent;
+
+            int childCount = parent.transform.childCount;
+            if (childCount == 0)
+                return null;
+
+            Transform findGo = null;
+            for (int i = 0; i < childCount; i++)
+            {
+                var childTr = parent.transform.GetChild(i);
+                findGo = GetChild(childTr, goName);
+
+                if (findGo != null)
+                    break;
+            }
+
+            return findGo;
+        }
     }
 }

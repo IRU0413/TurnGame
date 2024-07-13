@@ -9,7 +9,7 @@ namespace Scripts.Cores
     public abstract class Assembly : MonoBehaviour
     {
         private Core _core;
-        protected bool _isInitialized;
+        private bool _isInitialized;
 
         public Core Base => _core;
         public bool IsInitialized => _isInitialized;
@@ -17,13 +17,11 @@ namespace Scripts.Cores
         public void Initialized(Core core)
         {
             if (_isInitialized) return;
-            if (!core.IsInitialized)
-            {
-                this.WarningPrint("코어가 초기화 되지 않았습니다");
-                return;
-            }
 
             _core = core;
+
+            // 오브젝트 로드 및 파츠 추가
+            OnBeforeInitialization();
             OnInitialized();
         }
         public void Removed()
@@ -33,6 +31,7 @@ namespace Scripts.Cores
             _isInitialized = false;
         }
 
+        protected virtual void OnBeforeInitialization() { }
         protected virtual void OnInitialized()
         {
             this.LogPrint("초기화 및 Core와 연결이 되었습니다.");

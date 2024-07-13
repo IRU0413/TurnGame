@@ -13,5 +13,10 @@ namespace Scripts.Generator
             _datas = GetDatas(_itemType.ToString());
             Debug.Log($"Get Data:{_datas != null}");
         }
+
+        protected string GetPathItemImageInResources(ItemType itemType, int id)
+        {
+            return $"Sprite/Item/{itemType}/{itemType}_Item_{id}";
+        }
     }
 }

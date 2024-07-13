@@ -9,7 +9,6 @@ namespace Scripts.Pattern
     {
         [SerializeField]
         private List<SerializableKeyValuePair<TKey, TValue>> _keyValuePairs = new List<SerializableKeyValuePair<TKey, TValue>>();
-
         private Dictionary<TKey, TValue> _dictionary = new Dictionary<TKey, TValue>();
 
         public int Count
@@ -69,6 +68,19 @@ namespace Scripts.Pattern
             return result;
         }
 
+        public TValue GetValue(TKey key)
+        {
+            TValue value = default;
+            foreach (var pair in _keyValuePairs)
+            {
+                if (pair.Key.Equals(key))
+                {
+                    value = pair.Value;
+                    return value;
+                }
+            }
+            return value;
+        }
         public bool TryGetValue(TKey key, out TValue value)
         {
             return _dictionary.TryGetValue(key, out value);

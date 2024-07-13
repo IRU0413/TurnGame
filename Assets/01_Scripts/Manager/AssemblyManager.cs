@@ -6,35 +6,16 @@ namespace Scripts.Manager
 {
     public class AssemblyManager : MonoBehaviourSingleton<AssemblyManager>
     {
-        private Dictionary<Core, List<Assembly>> _notInitUnit = new Dictionary<Core, List<Assembly>>();
+        private Dictionary<Assembly, List<Assembly>> _needAssemblies = new();
 
-        public void AddLateInitialize(Core core, Assembly assembly)
+        public void Add(Assembly applicant, List<Assembly> applicationList)
         {
-            if (core == null || assembly == null) return;
-            if (!_notInitUnit.ContainsKey(core))
-            {
-                _notInitUnit.Add(core, new());
-            }
 
-            List<Assembly> coreAssemblies = _notInitUnit[core];
-            if (!coreAssemblies.Contains(assembly))
-                coreAssemblies.Add(assembly);
         }
-        public void InitializeCoreAssemblies(Core core)
+
+        public void ApplicationProcessing(Assembly applicant)
         {
-            if (!_notInitUnit.ContainsKey(core))
-                return;
 
-            List<Assembly> coreAssemblies = _notInitUnit[core];
-            foreach (var assembly in coreAssemblies)
-            {
-                assembly.Initialized(core);
-
-                if (!assembly.IsInitialized)
-                    core.RemoveAssambly(assembly);
-            }
-
-            _notInitUnit.Remove(core);
         }
     }
 }

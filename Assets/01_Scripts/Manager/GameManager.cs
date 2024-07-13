@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
-    [SerializeField] private GameType _gameType = GameType.None;
+    [SerializeField] private GameModeType _gameMode = GameModeType.None;
 
     // 기본 기능들
     private InputManager _input = new InputManager();
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     private SettingInfor _settingInfo = new SettingInfor();
 
 
-    public static GameType GameType { get { return Instance._gameType; } }
+    public static GameModeType GameMode { get { return Instance._gameMode; } }
     // 기능
     public static InputManager Input { get { return Instance._input; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }

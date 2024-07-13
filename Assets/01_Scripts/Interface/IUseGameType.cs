@@ -4,6 +4,6 @@ namespace Scripts.Interface
 {
     public interface IUseGameType
     {
-        public void SetGameType(GameType type);
+        public void SetGameType(GameModeType type);
     }
 }

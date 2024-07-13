@@ -27,7 +27,7 @@ namespace Scripts.Cmp
 
             _thisTr = this.GetOrAddComponent<Transform>();
 
-            _moveModule.Init(_thisTr, _thisTr.position, _moveSpeed);
+            _moveModule.Init(_thisTr, _thisTr.position);
         }
 
         // Update is called once per frame
@@ -41,16 +41,16 @@ namespace Scripts.Cmp
                 if (_inputVector != Vector2.zero
                     && !_moveModule.IsMoving)
                 {
-                    _moveModule.RunSetting((Vector2)_thisTr.position + _inputVector);
+                    _moveModule.DirectionRunSetting((Vector2)_thisTr.position + _inputVector);
                 }
-                _moveModule.Move();
+                _moveModule.Move(_moveSpeed);
             }
             else
             {
                 if (_inputVector != Vector2.zero)
                 {
-                    _moveModule.RunSetting((Vector2)_thisTr.position + _inputVector);
-                    _moveModule.Move();
+                    _moveModule.DirectionRunSetting((Vector2)_thisTr.position + _inputVector);
+                    _moveModule.Move(_moveSpeed);
                 }
             }
 

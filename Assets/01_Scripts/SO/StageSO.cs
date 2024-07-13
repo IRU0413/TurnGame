@@ -91,7 +91,7 @@ namespace Scripts.SO
 
             return catLine;
         }
-        // Room Type Percent
+        // Room UnitType Percent
 
         // GetRoomType
         public RoomType GetRandomNumByCatLine(List<float> catLine)
@@ -154,7 +154,7 @@ namespace Scripts.SO
                     percent = _eventRoomCreatePercent;
                     break;
 
-                // Ev Type
+                // Ev UnitType
                 case RoomType.MerchantRoom:
                     percent = _merchantEvCreatePercent;
                     break;
@@ -165,7 +165,7 @@ namespace Scripts.SO
                     percent = _merchantEvCreatePercent;
                     break;
 
-                // Ev up Type
+                // Ev up UnitType
                 case RoomType.MerchantUpRoom:
                     percent = _merchantEvUpgradePercent;
                     break;
@@ -216,7 +216,7 @@ namespace Scripts.SO
                     constant = _eventRoomCreateConstantCount;
                     break;
 
-                // Ev Type
+                // Ev UnitType
                 case RoomType.MerchantRoom:
                     constant = _merchantEvCreateConstantCount;
                     break;

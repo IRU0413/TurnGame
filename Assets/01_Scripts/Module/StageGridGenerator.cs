@@ -24,23 +24,23 @@ namespace Scripts.Module
 
         public Dictionary<RoomType, List<Vector2Int>> Map => _roomDictionary;
 
-        public StageGridGenerator(GameType type)
+        public StageGridGenerator(GameModeType type)
         {
             _roomDictionary = new();
             SetGridCreator(type);
         }
-        public void SetGridCreator(GameType type)
+        public void SetGridCreator(GameModeType type)
         {
-            if (type == GameType.None)
-                type = GameType.Normal;
+            if (type == GameModeType.None)
+                type = GameModeType.Normal;
 
             switch (type)
             {
-                case GameType.Test:
+                case GameModeType.Test:
                     _pathCreator = new AstarPathCreator();
                     break;
-                case GameType.None:
-                case GameType.Normal:
+                case GameModeType.None:
+                case GameModeType.Normal:
                     _pathCreator = new RandomPathCreator();
                     break;
             }

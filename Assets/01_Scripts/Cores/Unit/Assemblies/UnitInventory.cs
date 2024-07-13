@@ -14,6 +14,7 @@ namespace Scripts.Cores.Unit.Assemblies
         protected override void OnInitialized()
         {
             base.OnInitialized();
+
             SetInventoryMaxCount(_haveItemMaxCount);
         }
 
@@ -51,7 +52,7 @@ namespace Scripts.Cores.Unit.Assemblies
             if (!_itemList.Contains(item))
             {
                 _itemList.Add(item);
-                item.InInventroy();
+                item.VisualGO.SetActive(false);
                 _haveItemCount++;
             }
         }
@@ -59,12 +60,12 @@ namespace Scripts.Cores.Unit.Assemblies
         {
             if (!_itemList.Contains(item))
             {
-                Debug.LogError("인벤토리가 없는 아이템을 제거 하려 시도합니다.");
+                Debug.LogWarning("인벤토리가 없는 아이템을 제거 하려 시도합니다.");
                 return;
             }
 
             _itemList.Remove(item);
-            item.OutInventory();
+            item.VisualGO.SetActive(true);
             _haveItemCount--;
         }
     }

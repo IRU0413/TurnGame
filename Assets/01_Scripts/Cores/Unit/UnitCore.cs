@@ -3,111 +3,65 @@ using Scripts.Enums;
 using Scripts.Manager;
 using Scripts.Util;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Scripts.Cores.Unit
 {
-    [RequireComponent(typeof(UnitAnimationCtrl))]
-    [RequireComponent(typeof(UnitEquipment))]
     public class UnitCore : Core
     {
         [Header("= UNIT BASE =")]
+        [SerializeField] private int _id = -1;
+        [SerializeField] private UnitType _unitType;
         [SerializeField] private UnitStateType _state = UnitStateType.None; // 상태
         [SerializeField] private UnitAttackType _attackType = UnitAttackType.None;
-        [SerializeField] private bool _isTest = false;
 
-        private SortingGroup _sortingLayer = null;
+        // 필수 컴포넌트 (아이디 필수 필요)
+        protected UnitAnimator _ani; // 비주얼, 애니메이션
+        protected UnitAbility _ability; // 능력치
 
-        // Controller Cmp
-        private UnitAnimationCtrl _aniCtrl = null;
-        private UnitEquipment gearCtrl = null;
+        public int ID => _id;
+        public UnitType UnitType => _unitType;
+        public UnitStateType State => _state;
+        public UnitAttackType AttackType => _attackType;
+
+        public UnitAnimator Ani => _ani;
+        public UnitAbility Ability => _ability;
+
+        public void Spawn(int id)
+        {
+            // 로드 필요함
+            _id = id;
+            Initialized();
+        }
 
         protected override void Initialized()
         {
             base.Initialized();
-            UnitManager.Instance.Add(this);
-            if (!UnitManager.Instance.ContainsUnit(this))
-                return;
+            _ani = GetOrAddAssembly<UnitAnimator>();
+            _ability = GetOrAddAssembly<UnitAbility>();
 
-            _aniCtrl = this.GetAssembly<UnitAnimationCtrl>();
             _state = UnitStateType.Idle;
-
+            UnitManager.Instance.Add(this);
             this.LogPrint(">>>>>>>>>> Unit 초기화 완료");
         }
 
-        public void SetState(UnitStateType state)
+        public virtual void SetState(UnitStateType state)
         {
             if (state == UnitStateType.None) return;
-            if (_aniCtrl == null) return;
+            if (_ani == null) return;
 
             _state = state;
-            _aniCtrl.PlayAnimation(_state, _attackType);
+            _ani.PlayAnimation(_state, _attackType);
         }
-        public void SetAttackType(UnitAttackType attackType)
+        public virtual void SetAttackType(UnitAttackType attackType)
         {
             _attackType = attackType;
         }
 
         protected virtual void Start()
         {
-            Initialized();
-        }
-        protected virtual void Update()
-        {
-            if (!_isTest)
-                return;
-            TestInput();
-        }
-        private void TestInput()
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                SetState(UnitStateType.Idle);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                SetState(UnitStateType.Move);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                SetAttackType(UnitAttackType.None);
-                SetState(UnitStateType.Attack);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                SetState(UnitStateType.CC);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                SetState(UnitStateType.Die);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                SetState(UnitStateType.Recover);
-            }
-
-
-            else if (Input.GetKeyDown(KeyCode.Q))
-            {
-                SetAttackType(UnitAttackType.NormalAttack);
-                SetState(UnitStateType.Attack);
-            }
-            else if (Input.GetKeyDown(KeyCode.W))
-            {
-
-                SetAttackType(UnitAttackType.SwordAttack);
-                SetState(UnitStateType.Attack);
-            }
-            else if (Input.GetKeyDown(KeyCode.E))
-            {
-                SetAttackType(UnitAttackType.MagicAttack);
-                SetState(UnitStateType.Attack);
-            }
-            else if (Input.GetKeyDown(KeyCode.R))
-            {
-                SetAttackType(UnitAttackType.BowAttack);
-                SetState(UnitStateType.Attack);
-            }
+            // Test
+            if (GameManager.GameMode == GameModeType.Test)
+                Initialized();
         }
     }
 }
