@@ -25,7 +25,7 @@ namespace Scripts.Cores.Item.Gear
             _itemType = so.ItemType;
             _itemGradeType = so.ItemGradeType;
             _itemSprite = so.ItemSprite;
-            _itemSpriteRotation = so.ItemSpriteRotation;
+            _itemSpriteRotation = so.SpriteRotationCalibration;
 
             _gearType = so.GearType;
             _abilities = so.Abilities;

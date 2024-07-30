@@ -11,6 +11,8 @@ namespace Scripts.Pattern
         private List<SerializableKeyValuePair<TKey, TValue>> _keyValuePairs = new List<SerializableKeyValuePair<TKey, TValue>>();
         private Dictionary<TKey, TValue> _dictionary = new Dictionary<TKey, TValue>();
 
+        public TKey Key { get; private set; }
+
         public int Count
         {
             get

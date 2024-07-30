@@ -12,23 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f42a971147472264b889b5003745ca31, type: 3}
   m_Name: Gear_Item_11000
   m_EditorClassIdentifier: 
-  _id: 11000
-  _itemName: "\uD754\uD55C \uC678\uD53C"
-  _itemType: 10000
-  _itemGradeType: 1
-  _itemSprite:
-  - {fileID: 1589403714872849932, guid: 8f78d772a66b1da40b65cd59381bd509, type: 3}
-  - {fileID: 4425119332354987815, guid: 8f78d772a66b1da40b65cd59381bd509, type: 3}
-  - {fileID: 889668667309676848, guid: 8f78d772a66b1da40b65cd59381bd509, type: 3}
-  _spriteRotationCalibration: 0
-  _gearType: 3
-  _abilities:
+  Id: 11000
+  ItemName: "\uD754\uD55C \uC678\uD53C"
+  ItemType: 10000
+  ItemGradeType: 1
+  ItemSprite: []
+  SpriteRotationCalibration: 0
+  GearType: 3
+  Abilities:
     _keyValuePairs:
     - Key: 2
       Value:
         Point: 5
         Percent: 0
     - Key: 6
+      Value:
+        Point: 10
+        Percent: 0
+    - Key: 12
       Value:
         Point: 10
         Percent: 0
