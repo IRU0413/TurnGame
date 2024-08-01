@@ -101,13 +101,13 @@ namespace Scripts.Cores.Unit.ActinoUnit
         }
 
         // 외부에서 데이터를 로드에서 넣어줬을 경우임.
-        public void Create(ActionUnitDataSO so = null)
+        public void Create(UnitDataSO so = null)
         {
             if (IsInitialized) return;
 
             if (so == null)
             {
-                so = GameManager.Resource.Load<ActionUnitDataSO>($"SO/Unit/AllData/UnitData_{_ID}");
+                so = GameManager.Resource.Load<UnitDataSO>($"SO/Unit/AllData/UnitData_{_ID}");
                 if (so == null) return;
             }
 
@@ -116,13 +116,13 @@ namespace Scripts.Cores.Unit.ActinoUnit
         }
 
         // 현재 SO 받으면 해당 정보를 넣어줌
-        private void InitSODataSetting(ActionUnitDataSO so)
+        private void InitSODataSetting(UnitDataSO so)
         {
-            _ID = so.ID;
+            _ID = so.Id;
             _unitName = so.Name;
             gameObject.name = _unitName;
-            if (so.Status == null) return;
-            _status = new ActionUnitStatus(so.Status);
+            /*if (so.Status == null) return;
+            _status = new ActionUnitStatus(so.Status);*/
             if (_status.Health > 0)
             {
                 SetState(UnitStateType.Idle);

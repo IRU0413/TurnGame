@@ -49,14 +49,16 @@ namespace Scripts.Cores.Unit.Assemblies
                     }
                 }
             }
-            public SerializableDictionary<UnitAbilityType, Ability> Abilities => _gearItemCore?.Abillities;
+            public SerializableDictionary<UnitAbilityType, Ability> Abilities => GearItem?.Abillities;
         }
 
-        private SerializableDictionary<GearType, PocketGear> _gears;
+        private SerializableDictionary<GearType, PocketGear> _gears = new();
+        private UnitAbility _linkAbility;
 
         protected override void OnBeforeInitialization()
         {
             Unit.GetOrAddAssembly<UnitAnimator>();
+            _linkAbility = Unit.GetOrAddAssembly<UnitAbility>();
         }
         protected override void OnInitialized()
         {
@@ -131,10 +133,6 @@ namespace Scripts.Cores.Unit.Assemblies
             // 필요한 포켓 가지고 오기
             PocketGear pocket = _gears.GetValue(gearItem.GearType);
 
-            // 포켓 사용 여부
-            if (pocket == null)
-                return;
-
             // 포켓에 지금 가지고 있는 장비가 있는지.
             if (pocket.GearItem != null)
                 Unequip(pocket);
@@ -146,6 +144,7 @@ namespace Scripts.Cores.Unit.Assemblies
             if (inven != null)
                 inven.RemoveItem(gearItem);
             pocket.GearItem.VisualGO.SetActive(false);
+            SetAbilityData();
             return;
         }
         // 해제
@@ -158,7 +157,7 @@ namespace Scripts.Cores.Unit.Assemblies
         }
         private void Unequip(PocketGear pocket)
         {
-            if (pocket == null)
+            if (pocket.GearItem == null)
                 return;
 
             // 인벤에 추가
@@ -171,6 +170,46 @@ namespace Scripts.Cores.Unit.Assemblies
             }
             // 해제
             pocket.GearItem = null;
+            SetAbilityData();
+        }
+
+        private void SetAbilityData()
+        {
+            Dictionary<UnitAbilityType, Ability> addAbilities = new();
+            var dictionaryGears = _gears.ToDictionary();
+            foreach (var gear in dictionaryGears)
+            {
+                if (gear.Value.Abilities == null)
+                    continue;
+                var abilities = gear.Value.Abilities.ToDictionary();
+                foreach (var ability in abilities)
+                {
+                    var key = ability.Key;
+                    var value = ability.Value;
+
+                    if (!addAbilities.ContainsKey(key))
+                    {
+                        Ability newAbility = new Ability();
+                        addAbilities.Add(key, newAbility);
+                    }
+
+                    addAbilities[key].Point = value.Point;
+                    addAbilities[key].Percent = value.Percent;
+                }
+            }
+
+            for (int i = (int)UnitAbilityType.Health; i <= (int)UnitAbilityType.ActionSpeed; i++)
+            {
+                var keyValue = (UnitAbilityType)i;
+                if (addAbilities.TryGetValue(keyValue, out var addAbility))
+                {
+                    _linkAbility.SetAbility(keyValue, addAbility.Point, addAbility.Percent);
+                    continue;
+                }
+                _linkAbility.SetAbility(keyValue, 0, 0);
+            }
+
+            Debug.Log(_linkAbility.ToString());
         }
     }
 }

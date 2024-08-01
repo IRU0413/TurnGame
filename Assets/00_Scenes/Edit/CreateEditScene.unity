@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 258280531}
   - component: {fileID: 258280530}
+  - component: {fileID: 258280532}
   m_Layer: 0
   m_Name: UnitSODataGenerator
   m_TagString: Untagged
@@ -168,6 +169,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &258280532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258280529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f762da56eb301d4eb235a4c2cd6c055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isReflectionDebug: 0
+  _csvFileName: Unit_Ability_CSV_Data
+  _csvVersion: 2
+  _unitSOFileName: UnitData
+  _abilitySOFileName: UnitAbility
+  _soundSOFileName: UnitSound
+  _abilityResultSavePath: Assets/Resources/SO/Unit/Ability/UnitAbility
+  _abilityResultDataPath: CSV/Unit/Ability/Unit_Ability_CSV_Data_2
+  _unitResultSavePath: Assets/Resources/SO/Unit/Data/UnitData
+  _unitResultDataPath: 
 --- !u!1 &273913658
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,12 +495,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1044670631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a86b54fa4a2be8348b68036a0d6000d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d78ecfd7d456ce4984853057e1154f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _generatorType: 1
-  _csvVersion: 0
-  _itemType: 10000
+  _isReflectionDebug: 0
+  _dataVersion: 0
+  _saveItemType: 10000
 --- !u!1 &1066630177
 GameObject:
   m_ObjectHideFlags: 0

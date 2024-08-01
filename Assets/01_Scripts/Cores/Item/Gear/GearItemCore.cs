@@ -9,7 +9,7 @@ namespace Scripts.Cores.Item.Gear
     public class GearItemCore : ItemCore
     {
         [SerializeField] private GearType _gearType = GearType.None;
-        [SerializeField] private SerializableDictionary<UnitAbilityType, Ability> _abilities = new SerializableDictionary<UnitAbilityType, Ability>();
+        [SerializeField] private SerializableDictionary<UnitAbilityType, Ability> _abilities = new();
 
         public GearType GearType => _gearType;
         public SerializableDictionary<UnitAbilityType, Ability> Abillities => _abilities;

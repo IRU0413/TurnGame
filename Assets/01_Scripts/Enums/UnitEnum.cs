@@ -98,7 +98,7 @@ namespace Scripts.Enums
         MagicPower,
 
         Armor,
-        MagicResistacne,
+        MagicResistance,
 
         CriticalStrikeChance,
         CriticalStrikeDamage,

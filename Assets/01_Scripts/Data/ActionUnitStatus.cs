@@ -146,7 +146,7 @@ namespace Scripts.Data
 
         public float CurrActionSpeed => _currentActionSpeed;
 
-        public ActionUnitStatus(ActionUnitStatusSO so)
+        public ActionUnitStatus(UnitAbilitySO so)
         {
             _baseHealth = so.Health;
             _baseMana = so.Mana;

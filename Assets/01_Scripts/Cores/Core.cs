@@ -50,6 +50,18 @@ namespace Scripts.Cores
             }
             return assembly;
         }
+        public virtual T ForceInitialized<T>(T assembly = null) where T : Assembly
+        {
+            if (assembly == null)
+                assembly = GetAssembly<T>();
+
+            if (assembly != null)
+            {
+                assembly.Initialized(this);
+                Debug.Log($"{this}의 부품[{assembly.name}]을 강제 초기화");
+            }
+            return assembly;
+        }
 
         /// <summary>
         /// 연결된 부품을 제거하는 기능

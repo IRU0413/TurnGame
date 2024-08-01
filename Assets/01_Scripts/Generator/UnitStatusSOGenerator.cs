@@ -39,26 +39,26 @@ namespace Scripts.Generator
                 var sound = SaveSoundSO(id);
 
                 string soPath = $"{UNIT_DATA_SO_SAVE_PATH}_{id}.asset";
-                ActionUnitDataSO so = AssetDatabase.LoadAssetAtPath<ActionUnitDataSO>(soPath);
+                UnitDataSO so = AssetDatabase.LoadAssetAtPath<UnitDataSO>(soPath);
                 if (so != null)
                 {
-                    so.SaveData(id, unitName, job, status, sound);
+                    // so.SaveData(id, unitName, job, status, sound);
                     EditorUtility.SetDirty(so);
                     AssetDatabase.SaveAssets();
                 }
                 else
                 {
-                    so = ScriptableObject.CreateInstance<ActionUnitDataSO>();
-                    so.SaveData(id, unitName, job, status, sound);
+                    so = ScriptableObject.CreateInstance<UnitDataSO>();
+                    // so.SaveData(id, unitName, job, status, sound);
                     AssetDatabase.CreateAsset(so, soPath);
                 }
             }
         }
 
-        private ActionUnitStatusSO SaveStatusSO(int id, Dictionary<string, object> data)
+        private UnitAbilitySO SaveStatusSO(int id, Dictionary<string, object> data)
         {
             string fileName = $"{UNIT_STATUS_SO_SAVE_PATH}_{id}.asset";
-            ActionUnitStatusSO so = AssetDatabase.LoadAssetAtPath<ActionUnitStatusSO>(fileName);
+            UnitAbilitySO so = AssetDatabase.LoadAssetAtPath<UnitAbilitySO>(fileName);
 
             float health = ExtraFunction.GetValueToKeyEnum<float>(data, ActionUnitProperty.Health);
             float mana = ExtraFunction.GetValueToKeyEnum<float>(data, ActionUnitProperty.Mana);
@@ -80,14 +80,14 @@ namespace Scripts.Generator
 
             if (so != null)
             {
-                so.SaveData(id, health, mana, attackPower, magicPower, armor, magicResistance, criticalStrikeChance, criticalStrikeDamage, armorPenetration, magicPenetration, activeSpeed, movePoint);
+                // so.SaveData(id, health, mana, attackPower, magicPower, armor, magicResistance, criticalStrikeChance, criticalStrikeDamage, armorPenetration, magicPenetration, activeSpeed, movePoint);
                 EditorUtility.SetDirty(so);
                 AssetDatabase.SaveAssets();
             }
             else
             {
-                so = ScriptableObject.CreateInstance<ActionUnitStatusSO>();
-                so.SaveData(id, health, mana, attackPower, magicPower, armor, magicResistance, criticalStrikeChance, criticalStrikeDamage, armorPenetration, magicPenetration, activeSpeed, movePoint);
+                so = ScriptableObject.CreateInstance<UnitAbilitySO>();
+                // so.SaveData(id, health, mana, attackPower, magicPower, armor, magicResistance, criticalStrikeChance, criticalStrikeDamage, armorPenetration, magicPenetration, activeSpeed, movePoint);
                 AssetDatabase.CreateAsset(so, fileName);
             }
 

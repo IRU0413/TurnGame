@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54812a3471f72f4c9cee96068a5460b, type: 3}
+  m_Name: UnitData_20008
+  m_EditorClassIdentifier: 
+  Id: 20008
+  Name: "\uD611\uACE1\uC758 \uBC14\uC704\uAC1C"
+  JobType: 6
+  UnitAbilitySO: {fileID: 11400000, guid: c958c8aa4a52e0d43bd8eb4da66316fb, type: 2}
+  UnitSoundSO: {fileID: 0}

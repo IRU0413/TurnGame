@@ -16,7 +16,10 @@ MonoBehaviour:
   ItemName: "\uD754\uD55C \uC678\uD53C"
   ItemType: 10000
   ItemGradeType: 1
-  ItemSprite: []
+  ItemSprite:
+  - {fileID: 1589403714872849932, guid: 8f78d772a66b1da40b65cd59381bd509, type: 3}
+  - {fileID: 4425119332354987815, guid: 8f78d772a66b1da40b65cd59381bd509, type: 3}
+  - {fileID: 889668667309676848, guid: 8f78d772a66b1da40b65cd59381bd509, type: 3}
   SpriteRotationCalibration: 0
   GearType: 3
   Abilities:

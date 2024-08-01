@@ -157,6 +157,8 @@ namespace Scripts.Cores.Item
 
         private Sprite GetIconSprite(Sprite[] itemSprites)
         {
+            if (itemSprites.Length == 0) return null;
+
             Texture2D spriteParentTexture2D = itemSprites[0].texture;
             int pixelsPerUnit = 32;
 

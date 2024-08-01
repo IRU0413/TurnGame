@@ -16,7 +16,8 @@ MonoBehaviour:
   ItemName: "\uACE0\uAE09 \uD070\uB9DD\uD1A0"
   ItemType: 10000
   ItemGradeType: 2
-  ItemSprite: []
+  ItemSprite:
+  - {fileID: 21300000, guid: edd2bb13ce3df8f43a0b4ca9cc5e85ef, type: 3}
   SpriteRotationCalibration: 0
   GearType: 5
   Abilities:

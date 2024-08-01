@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88790e3619bcfa4e9e40aa68b893a27, type: 3}
+  m_Name: UnitAbility_10002
+  m_EditorClassIdentifier: 
+  Id: 10002
+  Health: 654
+  Mana: 200
+  AttackPower: 63
+  MagicPower: 0
+  Armor: 32
+  MagicResistance: 29
+  CriticalStrikeChance: 0
+  CriticalStrikeDamage: 0
+  ArmorPenetration: 0
+  MagicPenetration: 0
+  ActionSpeed: 345
+  MovePoint: 4

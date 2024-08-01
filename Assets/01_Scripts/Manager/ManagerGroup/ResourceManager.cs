@@ -6,6 +6,8 @@ namespace Scripts.Manager
     public class ResourceManager
     {
         private const string RESOURCE_PATH = "Prefab/Managers/";
+        private const string CSV_DATA_PATH = "CSV/";
+        private const string SO_DATA_PATH = "SO/";
 
         public T Load<T>(string path) where T : Object
         {

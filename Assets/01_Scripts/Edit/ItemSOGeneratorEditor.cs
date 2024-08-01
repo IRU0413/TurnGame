@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace Scripts.Edit
 {
-    [CustomEditor(typeof(ItemSOGenerator))]
+    [CustomEditor(typeof(SOGenerator), true)]
     public class ItemSOGeneratorEditor : Editor
     {
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
 
-            ItemSOGenerator generator = (ItemSOGenerator)target;
+            var generator = (SOGenerator)target;
             if (GUILayout.Button("Create Scriptable Object"))
             {
-                generator.Create();
+                generator.CreateEditBtn();
             }
         }
     }
